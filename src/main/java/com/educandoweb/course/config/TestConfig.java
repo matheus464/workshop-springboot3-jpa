@@ -14,14 +14,13 @@ import java.util.Arrays;
 public class TestConfig implements CommandLineRunner {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
 
     @Override
     public void run(String... args) throws Exception {
-        User u1 = new User(null, "Angel Pink", "angel@gmail.com","96666666", "123456");
-        User u2 = new User(null, "George Grey", "george@gmail.com", "9555555", "123456");
-
-        userRepository.saveAll(Arrays.asList(u1, u2));
+        User u1 = new User(1l, "Matheus", "matheus@gmail.com", "98888888", "123456");
+        User u2 = new User(2l, "Maria", "maria@gmail.com", "97777777", "123456");
+        repository.saveAll(Arrays.asList(u1, u2));
     }
 }

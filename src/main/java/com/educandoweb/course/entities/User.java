@@ -22,7 +22,7 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    @JsonIgnore//server para trazer os resultados de relacionamento;
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 

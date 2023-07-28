@@ -1,5 +1,7 @@
 package com.educandoweb.course.entities;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -8,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_users")
+@Table(name = "tb_user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -20,13 +22,13 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+    @JsonIgnore//server para trazer os resultados de relacionamento;
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
-
     public User(){
     }
-    public User(Long id, String name, String email,String phone, String password){
+    public User(Long id, String name, String email, String phone, String password){
         this.id = id;
         this.name = name;
         this.email = email;
@@ -46,9 +48,7 @@ public class User implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name;}
 
     public String getEmail() {
         return email;
@@ -73,8 +73,6 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public List<Order> getOrders() { return orders; }
 
     @Override
     public boolean equals(Object o) {

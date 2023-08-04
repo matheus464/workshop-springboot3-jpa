@@ -61,12 +61,12 @@ public class Order implements Serializable {
         this.client = client;
     }
 
-    public OrderStatus getOrderStatus() { return OrderStatus.valueOf(orderStatus); }
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
 
     public void setOrderStatus(OrderStatus orderStatus) {
-        if(orderStatus != null){
-            this.orderStatus = orderStatus.getCode();
-        }
+        this.orderStatus = orderStatus.getCode();
     }
 
     @Override

@@ -25,7 +25,7 @@ public class Product implements Serializable {
     @JoinTable(name = "tb_product_category",
                 joinColumns = @JoinColumn(name = "product_id"),
                 inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new HashSet<>(); //coleção que nao deixa repetir a mesma categoria para um mesmo produto
+    private Set<Category> categories = new HashSet<>(); //coleção SET que nao deixa repetir a mesma categoria para um mesmo produto
 
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> items = new HashSet<>();
@@ -85,14 +85,14 @@ public class Product implements Serializable {
         return categories;
     }
 
-   @JsonIgnore
-   public Set<Order> getOrders(){
+    @JsonIgnore
+    public Set<Order> getItems(){
         Set<Order> set = new HashSet<>();
         for(OrderItem x: items){
             set.add(x.getOrder());
         }
         return set;
-   }
+    }
 
     @Override
     public boolean equals(Object o) {

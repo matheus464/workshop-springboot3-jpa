@@ -2,6 +2,7 @@ package com.educandoweb.course.services;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findById(Long id){
         Optional<User> u =  userRepository.findById(id);
-        return  u.get();
+        return u.orElseThrow( () -> new ResourceNotFoundException(id));
     }
 
     @Transactional(readOnly = true)
@@ -42,6 +43,8 @@ public class UserService {
         updateData(entity, obj);
         return userRepository.save(entity);
     }
+
+    @Transactional(readOnly = false)
     public void updateData(User entity, User obj){
         entity.setName(obj.getName());
         entity.setEmail(obj.getEmail());
